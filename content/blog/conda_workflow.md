@@ -6,8 +6,6 @@ date = "2021-06-21T11:44:22+02:00"
 # Set menu to "main" to add this page to
 # the main menu on top of the page
 #
-menu = "main"
-
 #
 # description is optional
 #
@@ -16,7 +14,7 @@ menu = "main"
 #
 # tags are optional
 #
-# tags = ["markdown","syntax",]
+tags = ["conda","poetry", "python"]
 +++
 
 # Conda Workflow
