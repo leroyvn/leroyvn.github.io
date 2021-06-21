@@ -1,5 +1,8 @@
 
-baseURL = "https://example.com"
+baseURL = "https://leroyvn.github.io"
+
+# Dev dir
+publishDir = "build/leroyvn.github.io" # Publication configuration
 
 # The name of this wonderful theme ;-).
 theme = 'hugo-bearblog'
