@@ -17,8 +17,6 @@ date = "2021-06-21T11:44:22+02:00"
 tags = ["conda","poetry", "python"]
 +++
 
-# Conda Workflow
-
 This page describes my Conda workflow.
 
 ## Conda
@@ -87,7 +85,8 @@ $ python setup.py develop --no-deps
 > - code is in `src/`;
 > - package is named `my_package`.
 >
-> Your package may actually consist of several Python packages (here, we > only have `my_package`, but we could have more).
+> Your package may actually consist of several Python packages (here, we
+> only have `my_package`, but we could have more).
 >
 > ```ini
 > [metadata]
