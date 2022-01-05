@@ -1,6 +1,3 @@
 [submodule "themes/hugo-bearblog"]
 	path = themes/hugo-bearblog
 	url = https://github.com/leroyvn/hugo-bearblog.git
-[submodule "build/leroyvn.github.io"]
-	path = build/leroyvn.github.io
-	url = git@github.com:leroyvn/leroyvn.github.io.git
