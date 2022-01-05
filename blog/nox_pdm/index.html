@@ -51,14 +51,14 @@ We will use Nox to automate testing on multiple Python versions during CI. We&rs
 <content>
 <p>Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.</p>
 <p>We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions. We&rsquo;ll therefore try and vary the Nox session&rsquo;s behaviour using Nox and PDM features.</p>
-<h1 id=assumptions>Assumptions</h1>
+<h2 id=assumptions>Assumptions</h2>
 <ul>
 <li>Our development dependencies (defined in the <code>tool.pdm.dev-dependencies</code> table of our <code>pyproject.toml</code>) include a <code>tests</code> group, which includes at least some version of <code>pytest</code>.</li>
 <li>Nox and PDM are installed externally, <em>i.e.</em> they are not included in our development dependencies.</li>
 <li>Our tests are located in a <code>tests</code> directory.</li>
 <li>Our development environment ships Python versions from 3.7 to 3.10.</li>
 </ul>
-<h1 id=local-testing>Local testing</h1>
+<h2 id=local-testing>Local testing</h2>
 <p>For this use case, we want Nox to simply do <code>pytest &lt;some_args></code> in the currently active virtual environment or using our PEP 582 setup. We notably do <em>not</em> want an installation step: this is taken care of by the user upon development enviromnent setup. Since our development dependencies include Pytest, we want Nox to call:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>pdm run pytest tests/
 </code></pre></div><p>The only caveat is that PDM is external to our currently active environment: we&rsquo;ll use the <code>external</code> argument of the <code>session.run()</code> function. We therefore create a simple <code>noxfile.py</code> as follows:</p>
@@ -71,7 +71,7 @@ We will use Nox to automate testing on multiple Python versions during CI. We&rs
 </code></pre></div><p>We can then invoke the <code>nox</code> command without virtual environment usage as follows:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>nox --no-venv -s <span style=color:#8be9fd;font-style:italic>test</span>
 </code></pre></div><p>This will run Pytest in the currently active environment (or our PEP 582 setup).</p>
-<h1 id=traditional-nox-workflow>Traditional Nox workflow</h1>
+<h2 id=traditional-nox-workflow>Traditional Nox workflow</h2>
 <p>Let&rsquo;s extend our usage to the regular virtual environment-based Nox workflow. We still want to retain the previous behaviour, but we also want it to work fine in an isolated virtual environment. We&rsquo;ll first configure PDM (using <a href=https://pdm.fming.dev/configuration/>environment variables</a>) to behave as follows:</p>
 <ul>
 <li>Install dependencies to the current virtual environment (<code>PDM_USE_VENV</code>)</li>
