@@ -1,0 +1,240 @@
+<!doctype html><html lang=en-uk>
+<head>
+<meta http-equiv=x-clacks-overhead content="GNU Terry Pratchett">
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel="shortcut icon" href=https://leroyvn.github.io/images/favicon.png>
+<title>Conda Workflow | Vincent's Personal Page</title>
+<meta name=title content="Conda Workflow">
+<meta name=description content="This page describes my Conda workflow.
+Conda I use Conda as my environment and package manager. This choice is the outcome of a long professional history. Pros for choosing Conda:
+ it&rsquo;s portable; it&rsquo;s simple to use; it provides optimised binaries for several scientific packages; it saves space on my hard drive; it can install more than just Python stuff.  Cons:
+ many packages are missing (and interoperability with Pip has many issues when one starts playing with dependency pinning); usually second-class citizen in CI workflows (see also previous point about deps pinning); Conda&rsquo;s dependency resolution is slow; many people don&rsquo;t use Conda.">
+<meta name=keywords content="conda,poetry,python,">
+<meta property="og:title" content="Conda Workflow">
+<meta property="og:description" content="This page describes my Conda workflow.
+Conda I use Conda as my environment and package manager. This choice is the outcome of a long professional history. Pros for choosing Conda:
+ it&rsquo;s portable; it&rsquo;s simple to use; it provides optimised binaries for several scientific packages; it saves space on my hard drive; it can install more than just Python stuff.  Cons:
+ many packages are missing (and interoperability with Pip has many issues when one starts playing with dependency pinning); usually second-class citizen in CI workflows (see also previous point about deps pinning); Conda&rsquo;s dependency resolution is slow; many people don&rsquo;t use Conda.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://leroyvn.github.io/blog/conda_workflow/"><meta property="og:image" content="https://leroyvn.github.io/images/share.png"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2021-06-21T11:44:22+02:00">
+<meta property="article:modified_time" content="2021-06-21T11:44:22+02:00"><meta property="og:site_name" content="Vincent's Personal Page">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://leroyvn.github.io/images/share.png">
+<meta name=twitter:title content="Conda Workflow">
+<meta name=twitter:description content="This page describes my Conda workflow.
+Conda I use Conda as my environment and package manager. This choice is the outcome of a long professional history. Pros for choosing Conda:
+ it&rsquo;s portable; it&rsquo;s simple to use; it provides optimised binaries for several scientific packages; it saves space on my hard drive; it can install more than just Python stuff.  Cons:
+ many packages are missing (and interoperability with Pip has many issues when one starts playing with dependency pinning); usually second-class citizen in CI workflows (see also previous point about deps pinning); Conda&rsquo;s dependency resolution is slow; many people don&rsquo;t use Conda.">
+<meta itemprop=name content="Conda Workflow">
+<meta itemprop=description content="This page describes my Conda workflow.
+Conda I use Conda as my environment and package manager. This choice is the outcome of a long professional history. Pros for choosing Conda:
+ it&rsquo;s portable; it&rsquo;s simple to use; it provides optimised binaries for several scientific packages; it saves space on my hard drive; it can install more than just Python stuff.  Cons:
+ many packages are missing (and interoperability with Pip has many issues when one starts playing with dependency pinning); usually second-class citizen in CI workflows (see also previous point about deps pinning); Conda&rsquo;s dependency resolution is slow; many people don&rsquo;t use Conda."><meta itemprop=datePublished content="2021-06-21T11:44:22+02:00">
+<meta itemprop=dateModified content="2021-06-21T11:44:22+02:00">
+<meta itemprop=wordCount content="888"><meta itemprop=image content="https://leroyvn.github.io/images/share.png">
+<meta itemprop=keywords content="conda,poetry,python,">
+<meta name=referrer content="no-referrer-when-downgrade">
+<style>body{font-family:Verdana,sans-serif;margin:auto;padding:20px;max-width:720px;text-align:left;background-color:#fff;word-wrap:break-word;overflow-wrap:break-word;line-height:1.5;color:#444}h1,h2,h3,h4,h5,h6,strong,b{color:#222}a{color:#3273dc}.title{text-decoration:none;border:0}.title span{font-weight:400}nav a{margin-right:10px}textarea{width:100%;font-size:16px}input{font-size:16px}content{line-height:1.6}table{width:100%}img{max-width:100%}code{padding:2px 5px;background-color:#f2f2f2}pre code{color:#222;display:block;padding:20px;white-space:pre-wrap;font-size:14px}div.highlight pre{background-color:initial;color:initial}div.highlight code{background-color:unset;color:unset}blockquote{border-left:1px solid #999;color:#222;padding-left:20px;font-style:italic}footer{padding:25px;text-align:center}.helptext{color:#777;font-size:small}.errorlist{color:#eba613;font-size:small}ul.blog-posts{list-style-type:none;padding:unset}ul.blog-posts li{display:flex}ul.blog-posts li span{flex:0 0 130px}ul.blog-posts li a:visited{color:#8b6fcb}@media(prefers-color-scheme:dark){body{background-color:#333;color:#ddd}h1,h2,h3,h4,h5,h6,strong,b{color:#eee}a{color:#8cc2dd}code{background-color:#777}pre code{color:#ddd}blockquote{color:#ccc}textarea,input{background-color:#252525;color:#ddd}.helptext{color:#aaa}}</style>
+<style>body{font-family:sans-serif}</style></head>
+<body>
+<header><a href=/ class=title>
+<h2>Vincent's Personal Page</h2>
+</a>
+<nav><a href=/>Home</a>
+<a href=/about/>About</a>
+<a href=/blog>Blog</a>
+</nav>
+</header>
+<main>
+<h1>Conda Workflow</h1>
+<p>
+<i>
+<time datetime=2021-06-21 pubdate>
+21 Jun, 2021
+</time>
+</i>
+</p>
+<content>
+<p>This page describes my Conda workflow.</p>
+<h2 id=conda>Conda</h2>
+<p>I use Conda as my environment and package manager. This choice is the outcome of a long professional history. Pros for choosing Conda:</p>
+<ul>
+<li>it&rsquo;s portable;</li>
+<li>it&rsquo;s simple to use;</li>
+<li>it provides optimised binaries for several scientific packages;</li>
+<li>it saves space on my hard drive;</li>
+<li>it can install more than just Python stuff.</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>many packages are missing (and interoperability with Pip has many issues when one starts playing with dependency pinning);</li>
+<li>usually second-class citizen in CI workflows (see also previous point about deps pinning);</li>
+<li>Conda&rsquo;s dependency resolution is <em>slow</em>;</li>
+<li>many people don&rsquo;t use Conda.</li>
+</ul>
+<p>My Conda workflow is consequently an attempt at overcoming some of these issues.</p>
+<ul>
+<li>Addressing missing packages: Use <a href=https://conda-forge.org/>conda-forge</a> as the default channel.</li>
+<li>Addressing slow dependency resolution: Use <a href=https://mamba.readthedocs.io/en/latest/>Mamba</a>.</li>
+</ul>
+<p>Conda distro choice and configuration (ordered by preference):</p>
+<ol>
+<li><a href=https://github.com/conda-forge/miniforge#mambaforge>mambaforge</a>.</li>
+<li><a href=https://github.com/conda-forge/miniforge#miniforge3>miniforge</a>, <a href=https://github.com/mamba-org/mamba#installation>install Mamba manually</a>.</li>
+<li><a href=https://docs.conda.io/en/latest/miniconda.html>miniconda</a>, <a href=https://conda-forge.org/docs/user/introduction.html#how-can-i-install-packages-from-conda-forge>add conda-forge to our channels</a>, <a href=https://github.com/mamba-org/mamba#installation>install Mamba manually</a>.</li>
+</ol>
+<h2 id=living-with-others-a-project-with-and-without-conda>Living with others: A project with and without Conda</h2>
+<p>Sometimes we can&rsquo;t get away with just Conda, especially when we work with others and when we start publishing software. But <strong>I still don&rsquo;t want to give up on Conda</strong>, I&rsquo;m very stubborn! So how can we single-source project dependencies and still pin both PyPI and Conda dependencies reliably?</p>
+<p>Solution:</p>
+<ul>
+<li>define and manage dependencies with <a href=https://python-poetry.org/>Poetry</a>;</li>
+<li>lock Conda dependencies with <a href=https://github.com/conda-incubator/conda-lock>conda-lock</a>.</li>
+</ul>
+<p>Still, conda-lock is no silver bullet: It will not pin Pip-only dependencies. We therefore might have to fight for our packages. It however turns out that for many projects, it&rsquo;s alright and we can develop and test with Conda, and package with Poetry. We just need to be a little careful.</p>
+<p>We might want to pay attention to the following points when writing our <code>pyproject.toml</code>:</p>
+<ul>
+<li><code>tool.poetry.dev-dependencies</code>: add <code>conda-lock</code> as a dependency;</li>
+<li><code>tool.conda-lock</code>: add <code>conda-forge</code> to your channels;</li>
+<li><code>tool.conda-lock.dependencies</code>: add <code>setuptools</code> and <code>poetry</code> as dependencies.</li>
+</ul>
+<p>In addition, we&rsquo;ll need a minimal <code>setup.py</code> to setup our project. I personally like the <code>setup.cfg</code> workflow. This way, we can install our Python package to a newly created and configured Conda env with:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ python setup.py develop --no-deps
+</code></pre></div><p><strong>setup.py</strong></p>
+<blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>import</span> setuptools
+
+setuptools<span style=color:#ff79c6>.</span>setup()
+</code></pre></div></blockquote>
+<p><strong>setup.cfg</strong></p>
+<blockquote>
+<p>Assumptions:</p>
+<ul>
+<li>code is in <code>src/</code>;</li>
+<li>package is named <code>my_package</code>.</li>
+</ul>
+<p>Your package may actually consist of several Python packages (here, we
+only have <code>my_package</code>, but we could have more).</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=color:#ff79c6>[metadata]</span>
+<span style=color:#50fa7b>name</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>my_package</span>
+<span style=color:#50fa7b>version</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>attr: my_package.__version__</span>
+
+<span style=color:#ff79c6>[options]</span>
+<span style=color:#6272a4># Package discovery</span>
+<span style=color:#50fa7b>package_dir</span> <span style=color:#ff79c6>=</span><span style=color:#f1fa8c>
+</span><span style=color:#f1fa8c>    =src</span>
+<span style=color:#50fa7b>packages</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>find:</span>
+
+<span style=color:#ff79c6>[options.packages.find]</span>
+<span style=color:#50fa7b>where</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>src</span>
+<span style=color:#50fa7b>include</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>*</span>
+</code></pre></div></blockquote>
+<p>Now we can glue all this with a makefile:</p>
+<p><strong>Makefile</strong></p>
+<blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-makefile data-lang=makefile>ifeq (<span style=color:#ff79c6>$(</span><span style=color:#8be9fd;font-style:italic>OS</span><span style=color:#ff79c6>)</span>, Windows_NT)
+	<span style=color:#8be9fd;font-style:italic>PLATFORM</span> <span style=color:#ff79c6>:=</span> win-64
+else
+	<span style=color:#8be9fd;font-style:italic>uname</span> <span style=color:#ff79c6>:=</span> <span style=color:#ff79c6>$(</span>shell sh -c <span style=color:#f1fa8c>&#39;uname 2&gt;/dev/null || echo unknown&#39;</span><span style=color:#ff79c6>)</span>
+	ifeq <span style=color:#ff79c6>(</span><span style=color:#ff79c6>$(</span>uname<span style=color:#ff79c6>)</span>, Darwin<span style=color:#ff79c6>)</span>
+		PLATFORM :<span style=color:#ff79c6>=</span> osx-64
+	<span style=color:#ff79c6>else</span> ifeq <span style=color:#ff79c6>(</span><span style=color:#ff79c6>$(</span>uname<span style=color:#ff79c6>)</span>, Linux<span style=color:#ff79c6>)</span>
+		PLATFORM :<span style=color:#ff79c6>=</span> linux-64
+	<span style=color:#ff79c6>else</span>
+		@echo <span style=color:#f1fa8c>&#34;Unsupported platform&#34;</span>
+		<span style=color:#8be9fd;font-style:italic>exit</span> <span style=color:#bd93f9>1</span>
+	endif
+endif
+
+<span style=color:#50fa7b>all</span><span style=color:#ff79c6>:</span>
+	@echo <span style=color:#f1fa8c>&#34;Detected platform: </span><span style=color:#ff79c6>$(</span>PLATFORM<span style=color:#ff79c6>)</span><span style=color:#f1fa8c>&#34;</span>
+
+<span style=color:#6272a4># Lock Poetry dependencies
+</span><span style=color:#6272a4></span><span style=color:#50fa7b>poetry-lock</span><span style=color:#ff79c6>:</span>
+	poetry lock
+
+<span style=color:#6272a4># Lock conda dependencies
+</span><span style=color:#6272a4></span><span style=color:#50fa7b>conda-lock</span><span style=color:#ff79c6>:</span>
+	conda-lock --file pyproject.toml <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>	    --filename-template <span style=color:#f1fa8c>&#34;requirements/environment-{platform}.lock&#34;</span> &gt; <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>	    -p <span style=color:#ff79c6>$(</span>PLATFORM<span style=color:#ff79c6>)</span>
+
+<span style=color:#50fa7b>conda-lock-all</span><span style=color:#ff79c6>:</span>
+	conda-lock --file pyproject.toml <span style=color:#f1fa8c>\
+</span><span style=color:#f1fa8c></span>	    --filename-template <span style=color:#f1fa8c>&#34;requirements/environment-{platform}.lock&#34;</span>
+
+<span style=color:#6272a4># Initialise development environment
+</span><span style=color:#6272a4></span><span style=color:#50fa7b>conda-init</span><span style=color:#ff79c6>:</span>
+	conda update --file requirements/environment-<span style=color:#ff79c6>$(</span>PLATFORM<span style=color:#ff79c6>)</span>.lock
+	python setup.py develop --no-deps
+
+<span style=color:#6272a4># Shortcut for poetry and conda lock
+</span><span style=color:#6272a4></span><span style=color:#50fa7b>lock</span><span style=color:#ff79c6>:</span> conda-lock-all poetry-lock
+
+<span style=color:#50fa7b>conda-update</span><span style=color:#ff79c6>:</span> conda-lock-all conda-init lock
+
+<span style=color:#50fa7b>.PHONY</span><span style=color:#ff79c6>:</span> poetry-lock conda-lock conda-lock-all conda-init conda-update
+</code></pre></div></blockquote>
+<p>Now, all we need to update our lock files is a simple</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ make lock
+</code></pre></div><p>We can initialise or update a Conda environment with</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ make conda-init
+</code></pre></div><h2 id=testing-with-nox>Testing with Nox</h2>
+<p>Next up on our chore list is setting up <a href=https://nox.thea.codes/>Nox</a> in a way such that we&rsquo;ll have:</p>
+<ul>
+<li>complete CI support for a list of Python versions;</li>
+<li>a similar set of Conda-based testing sessions to be sure that our package can also be installed and works with Conda.</li>
+</ul>
+<p>Once again, single-sourcing dependencies is the big problem, and sadly we can&rsquo;t solve it completely yet.</p>
+<h3 id=installing-nox>Installing Nox</h3>
+<p>The simplest and universal way is to use <a href=https://pypa.github.io/pipx/>pipx</a>. This one can be installed to your base Conda env or globally using Homebrew/Linuxbrew. <em>Note that you will probably have to add pipx to your path using <code>pipx ensurepath</code>.</em></p>
+<p>Then:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ pipx install nox
+</code></pre></div><p>Using pipx is nicer than using Conda because you can then customise pipx with PyPI packages &mdash; also doable with Conda, but not as cleanly. We will install the <a href=https://nox-poetry.readthedocs.io>nox-poetry</a> plugin:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ pipx inject nox nox-poetry
+</code></pre></div><h3 id=configuring-nox-sessions>Configuring Nox sessions</h3>
+<p>We can configure our Nox session and combine Poetry and Conda in various ways to cover more Python versions and test whether our package works with Conda-managed dependencies.</p>
+<ul>
+<li>Use a regular virtualenv and manage packages with Poetry: This is the &ldquo;normal&rdquo; configuration, the one we can use in a Conda-free context. In that case, running this session locally can require installing the Python versions missing from our OS, <em>e.g.</em> using <a href=https://github.com/pyenv/pyenv>pyenv</a> (preferrably installed using Homebrew/Linuxbrew for simplicity &mdash; don&rsquo;t forget shell configuration).</li>
+<li>Use a Conda env and manage packages with Poetry: This is useful to cover testing on multiple Python versions when you don&rsquo;t want to mess with .</li>
+<li>Use a Conda env and manage packages with Conda: This is useful to check if our package works fine in a Conda environment.</li>
+</ul>
+<p><strong>noxfile.py</strong></p>
+<blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>import</span> nox
+<span style=color:#ff79c6>import</span> nox_poetry
+
+
+<span style=color:#6272a4># Virtualenv + Poetry</span>
+@nox_poetry<span style=color:#ff79c6>.</span>session(python<span style=color:#ff79c6>=</span>[<span style=color:#f1fa8c>&#34;3.6&#34;</span>, <span style=color:#f1fa8c>&#34;3.7&#34;</span>, <span style=color:#f1fa8c>&#34;3.8&#34;</span>, <span style=color:#f1fa8c>&#34;3.9&#34;</span>])
+<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test_poetry</span>(session):
+    session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;poetry&#34;</span>, <span style=color:#f1fa8c>&#34;install&#34;</span>, external<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
+    session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;pytest&#34;</span>)
+
+
+<span style=color:#6272a4># Conda + Poetry</span>
+@nox<span style=color:#ff79c6>.</span>session(venv_backend<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;conda&#34;</span>, python<span style=color:#ff79c6>=</span>[<span style=color:#f1fa8c>&#34;3.6&#34;</span>, <span style=color:#f1fa8c>&#34;3.7&#34;</span>, <span style=color:#f1fa8c>&#34;3.8&#34;</span>, <span style=color:#f1fa8c>&#34;3.9&#34;</span>])
+<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test_conda_poetry</span>(session):
+    session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;poetry&#34;</span>, <span style=color:#f1fa8c>&#34;install&#34;</span>, external<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
+    session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;pytest&#34;</span>)
+
+
+<span style=color:#6272a4># Conda + Conda</span>
+@nox<span style=color:#ff79c6>.</span>session(venv_backend<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;conda&#34;</span>, python<span style=color:#ff79c6>=</span>[<span style=color:#f1fa8c>&#34;3.6&#34;</span>, <span style=color:#f1fa8c>&#34;3.7&#34;</span>, <span style=color:#f1fa8c>&#34;3.8&#34;</span>, <span style=color:#f1fa8c>&#34;3.9&#34;</span>])
+<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test_conda_conda</span>(session):
+    session<span style=color:#ff79c6>.</span>conda_install(<span style=color:#f1fa8c>&#34;pytest&#34;</span>, <span style=color:#f1fa8c>&#34;setuptools&#34;</span>)  <span style=color:#6272a4># Add here other deps which cannot be read from pyproject.toml</span>
+    session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;python&#34;</span>, <span style=color:#f1fa8c>&#34;setup.py&#34;</span>, <span style=color:#f1fa8c>&#34;develop&#34;</span>, <span style=color:#f1fa8c>&#34;--no-deps&#34;</span>)
+    session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;pytest&#34;</span>)
+</code></pre></div></blockquote>
+</content>
+<p>
+<a href=https://leroyvn.github.io/tags/conda/>#conda</a>
+<a href=https://leroyvn.github.io/tags/poetry/>#poetry</a>
+<a href=https://leroyvn.github.io/tags/python/>#python</a>
+</p>
+</main>
+<footer>Made with <a href=https://github.com/janraasch/hugo-bearblog/>Hugo ʕ•ᴥ•ʔ Bear</a>
+</footer>
+</body>
+</html>
