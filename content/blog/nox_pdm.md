@@ -21,14 +21,14 @@ Nox and PDM are both fantastic Python development tools. However, their opposite
 
 We will use Nox to automate testing on multiple Python versions during CI. We'd also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions. We'll therefore try and vary the Nox session's behaviour using Nox and PDM features.
 
-# Assumptions
+## Assumptions
 
 * Our development dependencies (defined in the `tool.pdm.dev-dependencies` table of our `pyproject.toml`) include a `tests` group, which includes at least some version of `pytest`.
 * Nox and PDM are installed externally, *i.e.* they are not included in our development dependencies.
 * Our tests are located in a `tests` directory.
 * Our development environment ships Python versions from 3.7 to 3.10.
 
-# Local testing
+## Local testing
 
 For this use case, we want Nox to simply do `pytest <some_args>` in the currently active virtual environment or using our PEP 582 setup. We notably do *not* want an installation step: this is taken care of by the user upon development enviromnent setup. Since our development dependencies include Pytest, we want Nox to call:
 
@@ -55,12 +55,12 @@ nox --no-venv -s test
 
 This will run Pytest in the currently active environment (or our PEP 582 setup).
 
-# Traditional Nox workflow
+## Traditional Nox workflow
 
 Let's extend our usage to the regular virtual environment-based Nox workflow. We still want to retain the previous behaviour, but we also want it to work fine in an isolated virtual environment. We'll first configure PDM (using [environment variables](https://pdm.fming.dev/configuration/)) to behave as follows:
 
-- Install dependencies to the current virtual environment (`PDM_USE_VENV`)
-- Ignore a set Python interpreter if any ([`PDM_IGNORE_SAVED_PYTHON`](https://pdm.fming.dev/usage/advanced/#use-nox-as-the-runner))
+* Install dependencies to the current virtual environment (`PDM_USE_VENV`)
+* Ignore a set Python interpreter if any ([`PDM_IGNORE_SAVED_PYTHON`](https://pdm.fming.dev/usage/advanced/#use-nox-as-the-runner))
 
 We'll then install our testing dependencies to our virtual environment using
 
