@@ -1,6 +1,6 @@
 +++
 title = "Using Nox with PDM"
-date = "2021-06-21T11:44:22+02:00"
+date = "2022-01-05T11:30:00+01:00"
 
 #
 # Set menu to "main" to add this page to
