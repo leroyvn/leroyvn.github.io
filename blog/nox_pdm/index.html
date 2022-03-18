@@ -1,111 +1,36 @@
-<!doctype html><html lang=en-uk>
-<head>
-<meta http-equiv=x-clacks-overhead content="GNU Terry Pratchett">
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<link rel="shortcut icon" href=https://leroyvn.github.io/images/favicon.png>
-<title>Using Nox with PDM | Vincent's Personal Page</title>
-<meta name=title content="Using Nox with PDM">
-<meta name=description content="Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.
-We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions.">
-<meta name=keywords content="nox,pdm,python,">
-<meta property="og:title" content="Using Nox with PDM">
-<meta property="og:description" content="Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.
-We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://leroyvn.github.io/blog/nox_pdm/"><meta property="og:image" content="https://leroyvn.github.io/images/share.png"><meta property="article:section" content="blog">
-<meta property="article:published_time" content="2022-01-05T11:30:00+01:00">
-<meta property="article:modified_time" content="2022-01-05T11:30:00+01:00"><meta property="og:site_name" content="Vincent's Personal Page">
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://leroyvn.github.io/images/share.png">
-<meta name=twitter:title content="Using Nox with PDM">
-<meta name=twitter:description content="Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.
-We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions.">
-<meta itemprop=name content="Using Nox with PDM">
-<meta itemprop=description content="Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.
-We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions."><meta itemprop=datePublished content="2022-01-05T11:30:00+01:00">
-<meta itemprop=dateModified content="2022-01-05T11:30:00+01:00">
-<meta itemprop=wordCount content="438"><meta itemprop=image content="https://leroyvn.github.io/images/share.png">
-<meta itemprop=keywords content="nox,pdm,python,">
-<meta name=referrer content="no-referrer-when-downgrade">
-<style>body{font-family:Verdana,sans-serif;margin:auto;padding:20px;max-width:720px;text-align:left;background-color:#fff;word-wrap:break-word;overflow-wrap:break-word;line-height:1.5;color:#444}h1,h2,h3,h4,h5,h6,strong,b{color:#222}a{color:#3273dc}.title{text-decoration:none;border:0}.title span{font-weight:400}nav a{margin-right:10px}textarea{width:100%;font-size:16px}input{font-size:16px}content{line-height:1.6}table{width:100%}img{max-width:100%}code{padding:2px 5px;background-color:#f2f2f2}pre code{color:#222;display:block;padding:20px;white-space:pre-wrap;font-size:14px}div.highlight pre{background-color:initial;color:initial}div.highlight code{background-color:unset;color:unset}blockquote{border-left:1px solid #999;color:#222;padding-left:20px;font-style:italic}footer{padding:25px;text-align:center}.helptext{color:#777;font-size:small}.errorlist{color:#eba613;font-size:small}ul.blog-posts{list-style-type:none;padding:unset}ul.blog-posts li{display:flex}ul.blog-posts li span{flex:0 0 130px}ul.blog-posts li a:visited{color:#8b6fcb}@media(prefers-color-scheme:dark){body{background-color:#333;color:#ddd}h1,h2,h3,h4,h5,h6,strong,b{color:#eee}a{color:#8cc2dd}code{background-color:#777}pre code{color:#ddd}blockquote{color:#ccc}textarea,input{background-color:#252525;color:#ddd}.helptext{color:#aaa}}</style>
-<style>body{font-family:sans-serif}</style></head>
-<body>
-<header><a href=/ class=title>
-<h2>Vincent's Personal Page</h2>
-</a>
-<nav><a href=/>Home</a>
+<!doctype html><html lang=en-uk><head><meta http-equiv=x-clacks-overhead content="GNU Terry Pratchett"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" href=https://leroyvn.github.io/images/favicon.png><title>Using Nox with PDM | Vincent's Personal Page</title><meta name=title content="Using Nox with PDM"><meta name=description content="Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.
+We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions."><meta name=keywords content="nox,pdm,python,"><meta property="og:title" content="Using Nox with PDM"><meta property="og:description" content="Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.
+We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions."><meta property="og:type" content="article"><meta property="og:url" content="https://leroyvn.github.io/blog/nox_pdm/"><meta property="og:image" content="https://leroyvn.github.io/images/share.png"><meta property="article:section" content="blog"><meta property="article:published_time" content="2022-01-05T11:30:00+01:00"><meta property="article:modified_time" content="2022-01-05T11:30:00+01:00"><meta property="og:site_name" content="Vincent's Personal Page"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://leroyvn.github.io/images/share.png"><meta name=twitter:title content="Using Nox with PDM"><meta name=twitter:description content="Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.
+We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions."><meta itemprop=name content="Using Nox with PDM"><meta itemprop=description content="Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.
+We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions."><meta itemprop=datePublished content="2022-01-05T11:30:00+01:00"><meta itemprop=dateModified content="2022-01-05T11:30:00+01:00"><meta itemprop=wordCount content="438"><meta itemprop=image content="https://leroyvn.github.io/images/share.png"><meta itemprop=keywords content="nox,pdm,python,"><meta name=referrer content="no-referrer-when-downgrade"><style>body{font-family:Verdana,sans-serif;margin:auto;padding:20px;max-width:720px;text-align:left;background-color:#fff;word-wrap:break-word;overflow-wrap:break-word;line-height:1.5;color:#444}h1,h2,h3,h4,h5,h6,strong,b{color:#222}a{color:#3273dc}.title{text-decoration:none;border:0}.title span{font-weight:400}nav a{margin-right:10px}textarea{width:100%;font-size:16px}input{font-size:16px}content{line-height:1.6}table{width:100%}img{max-width:100%}code{padding:2px 5px;background-color:#f2f2f2}pre code{color:#222;display:block;padding:20px;white-space:pre-wrap;font-size:14px}div.highlight pre{background-color:initial;color:initial}div.highlight code{background-color:unset;color:unset}blockquote{border-left:1px solid #999;color:#222;padding-left:20px;font-style:italic}footer{padding:25px;text-align:center}.helptext{color:#777;font-size:small}.errorlist{color:#eba613;font-size:small}ul.blog-posts{list-style-type:none;padding:unset}ul.blog-posts li{display:flex}ul.blog-posts li span{flex:0 0 130px}ul.blog-posts li a:visited{color:#8b6fcb}@media(prefers-color-scheme:dark){body{background-color:#333;color:#ddd}h1,h2,h3,h4,h5,h6,strong,b{color:#eee}a{color:#8cc2dd}code{background-color:#777}pre code{color:#ddd}blockquote{color:#ccc}textarea,input{background-color:#252525;color:#ddd}.helptext{color:#aaa}}</style><style>body{font-family:sans-serif}</style></head><body><header><a href=/ class=title><h2>Vincent's Personal Page</h2></a><nav><a href=/>Home</a>
 <a href=/about/>About</a>
-<a href=/blog>Blog</a>
-</nav>
-</header>
-<main>
-<h1>Using Nox with PDM</h1>
-<p>
-<i>
-<time datetime=2022-01-05 pubdate>
-05 Jan, 2022
-</time>
-</i>
-</p>
-<content>
-<p>Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.</p>
-<p>We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions. We&rsquo;ll therefore try and vary the Nox session&rsquo;s behaviour using Nox and PDM features.</p>
-<h2 id=assumptions>Assumptions</h2>
-<ul>
-<li>Our development dependencies (defined in the <code>tool.pdm.dev-dependencies</code> table of our <code>pyproject.toml</code>) include a <code>tests</code> group, which includes at least some version of <code>pytest</code>.</li>
-<li>Nox and PDM are installed externally, <em>i.e.</em> they are not included in our development dependencies.</li>
-<li>Our tests are located in a <code>tests</code> directory.</li>
-<li>Our development environment ships Python versions from 3.7 to 3.10.</li>
-</ul>
-<h2 id=local-testing>Local testing</h2>
-<p>For this use case, we want Nox to simply do <code>pytest &lt;some_args></code> in the currently active virtual environment or using our PEP 582 setup. We notably do <em>not</em> want an installation step: this is taken care of by the user upon development enviromnent setup. Since our development dependencies include Pytest, we want Nox to call:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>pdm run pytest tests/
-</code></pre></div><p>The only caveat is that PDM is external to our currently active environment: we&rsquo;ll use the <code>external</code> argument of the <code>session.run()</code> function. We therefore create a simple <code>noxfile.py</code> as follows:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>import</span> nox
-
-@nox<span style=color:#ff79c6>.</span>session
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test</span>(session):
-    <span style=color:#f1fa8c>&#34;&#34;&#34;Run the test suite.&#34;&#34;&#34;</span>
-    session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;pdm&#34;</span>, <span style=color:#f1fa8c>&#34;run&#34;</span>, <span style=color:#f1fa8c>&#34;pytest&#34;</span>, <span style=color:#f1fa8c>&#34;tests&#34;</span>, external<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
-</code></pre></div><p>We can then invoke the <code>nox</code> command without virtual environment usage as follows:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>nox --no-venv -s <span style=color:#8be9fd;font-style:italic>test</span>
-</code></pre></div><p>This will run Pytest in the currently active environment (or our PEP 582 setup).</p>
-<h2 id=traditional-nox-workflow>Traditional Nox workflow</h2>
-<p>Let&rsquo;s extend our usage to the regular virtual environment-based Nox workflow. We still want to retain the previous behaviour, but we also want it to work fine in an isolated virtual environment. We&rsquo;ll first configure PDM (using <a href=https://pdm.fming.dev/configuration/>environment variables</a>) to behave as follows:</p>
-<ul>
-<li>Install dependencies to the current virtual environment (<code>PDM_USE_VENV</code>)</li>
-<li>Ignore a set Python interpreter if any (<a href=https://pdm.fming.dev/usage/advanced/#use-nox-as-the-runner><code>PDM_IGNORE_SAVED_PYTHON</code></a>)</li>
-</ul>
-<p>We&rsquo;ll then install our testing dependencies to our virtual environment using</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>pdm install -G tests
-</code></pre></div><p>Our <code>noxfile.py</code> should now look like this (assuming we parametrise our session to test against all the Python versions we have installed on our system):</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#ff79c6>import</span> os
-<span style=color:#ff79c6>import</span> nox
-
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>_has_venv</span>(session):
-    <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>not</span> <span style=color:#8be9fd;font-style:italic>isinstance</span>(session<span style=color:#ff79c6>.</span>virtualenv, nox<span style=color:#ff79c6>.</span>virtualenv<span style=color:#ff79c6>.</span>PassthroughEnv)
-
-@nox<span style=color:#ff79c6>.</span>session(python<span style=color:#ff79c6>=</span>(<span style=color:#f1fa8c>&#34;3.7&#34;</span>, <span style=color:#f1fa8c>&#34;3.8&#34;</span>, <span style=color:#f1fa8c>&#34;3.9&#34;</span>, <span style=color:#f1fa8c>&#34;3.10&#34;</span>))
-<span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test</span>(session):
-    <span style=color:#f1fa8c>&#34;&#34;&#34;Run the test suite.&#34;&#34;&#34;</span>
-
-    <span style=color:#6272a4># If a virtual environment is used, configure PDM appropriately and install</span>
-    <span style=color:#6272a4># If --no-venv is used, the install step is skipped</span>
-    <span style=color:#ff79c6>if</span> _has_venv(session):
-        os<span style=color:#ff79c6>.</span>environ<span style=color:#ff79c6>.</span>update({<span style=color:#f1fa8c>&#34;PDM_USE_VENV&#34;</span>: <span style=color:#f1fa8c>&#34;1&#34;</span>, <span style=color:#f1fa8c>&#34;PDM_IGNORE_SAVED_PYTHON&#34;</span>: <span style=color:#f1fa8c>&#34;1&#34;</span>})
-        session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;pdm&#34;</span>, <span style=color:#f1fa8c>&#34;install&#34;</span>, <span style=color:#f1fa8c>&#34;-G&#34;</span>, <span style=color:#f1fa8c>&#34;tests&#34;</span>, external<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
-
- session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;pdm&#34;</span>, <span style=color:#f1fa8c>&#34;run&#34;</span>, <span style=color:#f1fa8c>&#34;pytest&#34;</span>, <span style=color:#f1fa8c>&#34;tests&#34;</span>, external<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
-</code></pre></div>
-</content>
-<p>
-<a href=https://leroyvn.github.io/tags/nox/>#nox</a>
+<a href=/resources/>Resources</a>
+<a href=/blog>Blog</a></nav></header><main><h1>Using Nox with PDM</h1><p><i><time datetime=2022-01-05 pubdate>05 Jan, 2022</time></i></p><content><p>Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&rsquo;ll explain how I integrated Nox in my PDM workflow.</p><p>We will use Nox to automate testing on multiple Python versions during CI. We&rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions. We&rsquo;ll therefore try and vary the Nox session&rsquo;s behaviour using Nox and PDM features.</p><h2 id=assumptions>Assumptions</h2><ul><li>Our development dependencies (defined in the <code>tool.pdm.dev-dependencies</code> table of our <code>pyproject.toml</code>) include a <code>tests</code> group, which includes at least some version of <code>pytest</code>.</li><li>Nox and PDM are installed externally, <em>i.e.</em> they are not included in our development dependencies.</li><li>Our tests are located in a <code>tests</code> directory.</li><li>Our development environment ships Python versions from 3.7 to 3.10.</li></ul><h2 id=local-testing>Local testing</h2><p>For this use case, we want Nox to simply do <code>pytest &lt;some_args></code> in the currently active virtual environment or using our PEP 582 setup. We notably do <em>not</em> want an installation step: this is taken care of by the user upon development enviromnent setup. Since our development dependencies include Pytest, we want Nox to call:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>pdm run pytest tests/
+</span></span></code></pre></div><p>The only caveat is that PDM is external to our currently active environment: we&rsquo;ll use the <code>external</code> argument of the <code>session.run()</code> function. We therefore create a simple <code>noxfile.py</code> as follows:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#ff79c6>import</span> nox
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>@nox<span style=color:#ff79c6>.</span>session
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test</span>(session):
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;&#34;&#34;Run the test suite.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;pdm&#34;</span>, <span style=color:#f1fa8c>&#34;run&#34;</span>, <span style=color:#f1fa8c>&#34;pytest&#34;</span>, <span style=color:#f1fa8c>&#34;tests&#34;</span>, external<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
+</span></span></code></pre></div><p>We can then invoke the <code>nox</code> command without virtual environment usage as follows:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>nox --no-venv -s <span style=color:#8be9fd;font-style:italic>test</span>
+</span></span></code></pre></div><p>This will run Pytest in the currently active environment (or our PEP 582 setup).</p><h2 id=traditional-nox-workflow>Traditional Nox workflow</h2><p>Let&rsquo;s extend our usage to the regular virtual environment-based Nox workflow. We still want to retain the previous behaviour, but we also want it to work fine in an isolated virtual environment. We&rsquo;ll first configure PDM (using <a href=https://pdm.fming.dev/configuration/>environment variables</a>) to behave as follows:</p><ul><li>Install dependencies to the current virtual environment (<code>PDM_USE_VENV</code>)</li><li>Ignore a set Python interpreter if any (<a href=https://pdm.fming.dev/usage/advanced/#use-nox-as-the-runner><code>PDM_IGNORE_SAVED_PYTHON</code></a>)</li></ul><p>We&rsquo;ll then install our testing dependencies to our virtual environment using</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>pdm install -G tests
+</span></span></code></pre></div><p>Our <code>noxfile.py</code> should now look like this (assuming we parametrise our session to test against all the Python versions we have installed on our system):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#ff79c6>import</span> os
+</span></span><span style=display:flex><span><span style=color:#ff79c6>import</span> nox
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>_has_venv</span>(session):
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>not</span> <span style=color:#8be9fd;font-style:italic>isinstance</span>(session<span style=color:#ff79c6>.</span>virtualenv, nox<span style=color:#ff79c6>.</span>virtualenv<span style=color:#ff79c6>.</span>PassthroughEnv)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>@nox<span style=color:#ff79c6>.</span>session(python<span style=color:#ff79c6>=</span>(<span style=color:#f1fa8c>&#34;3.7&#34;</span>, <span style=color:#f1fa8c>&#34;3.8&#34;</span>, <span style=color:#f1fa8c>&#34;3.9&#34;</span>, <span style=color:#f1fa8c>&#34;3.10&#34;</span>))
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>test</span>(session):
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;&#34;&#34;Run the test suite.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># If a virtual environment is used, configure PDM appropriately and install</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># If --no-venv is used, the install step is skipped</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> _has_venv(session):
+</span></span><span style=display:flex><span>        os<span style=color:#ff79c6>.</span>environ<span style=color:#ff79c6>.</span>update({<span style=color:#f1fa8c>&#34;PDM_USE_VENV&#34;</span>: <span style=color:#f1fa8c>&#34;1&#34;</span>, <span style=color:#f1fa8c>&#34;PDM_IGNORE_SAVED_PYTHON&#34;</span>: <span style=color:#f1fa8c>&#34;1&#34;</span>})
+</span></span><span style=display:flex><span>        session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;pdm&#34;</span>, <span style=color:#f1fa8c>&#34;install&#34;</span>, <span style=color:#f1fa8c>&#34;-G&#34;</span>, <span style=color:#f1fa8c>&#34;tests&#34;</span>, external<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> session<span style=color:#ff79c6>.</span>run(<span style=color:#f1fa8c>&#34;pdm&#34;</span>, <span style=color:#f1fa8c>&#34;run&#34;</span>, <span style=color:#f1fa8c>&#34;pytest&#34;</span>, <span style=color:#f1fa8c>&#34;tests&#34;</span>, external<span style=color:#ff79c6>=</span><span style=color:#ff79c6>True</span>)
+</span></span></code></pre></div></content><p><a href=https://leroyvn.github.io/tags/nox/>#nox</a>
 <a href=https://leroyvn.github.io/tags/pdm/>#pdm</a>
-<a href=https://leroyvn.github.io/tags/python/>#python</a>
-</p>
-</main>
-<footer>Made with <a href=https://github.com/janraasch/hugo-bearblog/>Hugo ʕ•ᴥ•ʔ Bear</a>
-</footer>
-</body>
-</html>
+<a href=https://leroyvn.github.io/tags/python/>#python</a></p></main><footer>Made with <a href=https://github.com/janraasch/hugo-bearblog/>Hugo ʕ•ᴥ•ʔ Bear</a></footer></body></html>
