@@ -1,4 +1,4 @@
-all: server
+all: serve
 
 .PHONY: publish
 publish:
@@ -8,6 +8,6 @@ publish:
 clean:
 	find build/leroyvn.github.io -not -name ".git" -delete
 
-.PHONY: server
-server:
-	hugo server --i18n-warnings -DF -b http://localhost/
+.PHONY: serve
+serve:
+	hugo serve
