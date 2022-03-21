@@ -3,3 +3,5 @@
         font-family: sans-serif;
     }
 </style>
+
+{{ if .Params.math }}{{ partial "helpers/katex.html" . }}{{ end }}
