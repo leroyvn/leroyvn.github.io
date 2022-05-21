@@ -70,88 +70,102 @@ In addition, we'll need a minimal `setup.py` to setup our project. I personally 
 $ python setup.py develop --no-deps
 ```
 
-**setup.py**
+{{< rawhtml >}}
+<details>
+<summary><strong>setup.py</strong></summary>
+{{< /rawhtml >}}
+```python
+import setuptools
 
-> ```python
-> import setuptools
->
-> setuptools.setup()
-> ```
+setuptools.setup()
+```
+{{< rawhtml >}}
+</details>
+{{< /rawhtml >}}
 
-**setup.cfg**
 
-> Assumptions:
->
-> - code is in `src/`;
-> - package is named `my_package`.
->
-> Your package may actually consist of several Python packages (here, we
-> only have `my_package`, but we could have more).
->
-> ```ini
-> [metadata]
-> name = my_package
-> version = attr: my_package.__version__
->
-> [options]
-> # Package discovery
-> package_dir =
->     =src
-> packages = find:
->
-> [options.packages.find]
-> where = src
-> include = *
-> ```
+{{< rawhtml >}}
+<details>
+<summary><strong>setup.cfg</strong></summary>
+{{< /rawhtml >}}
+Assumptions:
+
+- code is in `src/`;
+- package is named `my_package`.
+
+Your package may actually consist of several Python packages (here, we
+only have `my_package`, but we could have more).
+
+```ini
+[metadata]
+name = my_package
+version = attr: my_package.__version__
+
+[options]
+# Package discovery
+package_dir =
+    =src
+packages = find:
+
+[options.packages.find]
+where = src
+include = *
+```
+{{< rawhtml >}}
+</details>
+{{< /rawhtml >}}
 
 Now we can glue all this with a makefile:
 
-**Makefile**
+{{< rawhtml >}}
+<details>
+<summary><strong>Makefile</strong></summary>
+{{< /rawhtml >}}
+```makefile
+ifeq ($(OS), Windows_NT)
+	PLATFORM := win-64
+else
+	uname := $(shell sh -c 'uname 2>/dev/null || echo unknown')
+	ifeq ($(uname), Darwin)
+		PLATFORM := osx-64
+	else ifeq ($(uname), Linux)
+		PLATFORM := linux-64
+	else
+		@echo "Unsupported platform"
+		exit 1
+	endif
+endif
 
-> ```makefile
-> ifeq ($(OS), Windows_NT)
-> 	PLATFORM := win-64
-> else
-> 	uname := $(shell sh -c 'uname 2>/dev/null || echo unknown')
-> 	ifeq ($(uname), Darwin)
-> 		PLATFORM := osx-64
-> 	else ifeq ($(uname), Linux)
-> 		PLATFORM := linux-64
-> 	else
-> 		@echo "Unsupported platform"
-> 		exit 1
-> 	endif
-> endif
->
-> all:
-> 	@echo "Detected platform: $(PLATFORM)"
->
-> # Lock Poetry dependencies
-> poetry-lock:
-> 	poetry lock
->
-> # Lock conda dependencies
-> conda-lock:
-> 	conda-lock --file pyproject.toml \
-> 	    --filename-template "requirements/environment-{platform}.lock" > \
-> 	    -p $(PLATFORM)
->
-> conda-lock-all:
-> 	conda-lock --file pyproject.toml \
-> 	    --filename-template "requirements/environment-{platform}.lock"
->
-> # Initialise development environment
-> conda-init:
-> 	conda update --file requirements/environment-$(PLATFORM).lock
-> 	python setup.py develop --no-deps
->
-> # Shortcut for poetry and conda lock
-> lock: conda-lock-all poetry-lock
->
-> conda-update: conda-lock-all conda-init lock
->
-> .PHONY: poetry-lock conda-lock conda-lock-all conda-init conda-update
-> ```
+all:
+	@echo "Detected platform: $(PLATFORM)"
+
+# Lock Poetry dependencies
+poetry-lock:
+	poetry lock
+
+# Lock conda dependencies
+conda-lock:
+	conda-lock --file pyproject.toml \
+	    --filename-template "requirements/environment-{platform}.lock" > \
+	    -p $(PLATFORM)
+
+conda-lock-all:
+	conda-lock --file pyproject.toml \
+	    --filename-template "requirements/environment-{platform}.lock"
+
+# Initialise development environment
+conda-init:
+	conda update --file requirements/environment-$(PLATFORM).lock
+	python setup.py develop --no-deps
+
+# Shortcut for poetry and conda lock
+lock: conda-lock-all poetry-lock
+conda-update: conda-lock-all conda-init lock
+.PHONY: poetry-lock conda-lock conda-lock-all conda-init conda-update
+```
+{{< rawhtml >}}
+</details>
+{{< /rawhtml >}}
 
 Now, all we need to update our lock files is a simple
 
@@ -198,31 +212,36 @@ We can configure our Nox session and combine Poetry and Conda in various ways to
 - Use a Conda env and manage packages with Poetry: This is useful to cover testing on multiple Python versions when you don't want to mess with .
 - Use a Conda env and manage packages with Conda: This is useful to check if our package works fine in a Conda environment.
 
-**noxfile.py**
+{{< rawhtml >}}
+<details>
+<summary><strong>noxfile.py</strong></summary>
+{{< /rawhtml >}}
+```python
+import nox
+import nox_poetry
 
-> ```python
-> import nox
-> import nox_poetry
->
->
-> # Virtualenv + Poetry
-> @nox_poetry.session(python=["3.6", "3.7", "3.8", "3.9"])
-> def test_poetry(session):
->     session.run("poetry", "install", external=True)
->     session.run("pytest")
->
->
-> # Conda + Poetry
-> @nox.session(venv_backend="conda", python=["3.6", "3.7", "3.8", "3.9"])
-> def test_conda_poetry(session):
->     session.run("poetry", "install", external=True)
->     session.run("pytest")
->
->
-> # Conda + Conda
-> @nox.session(venv_backend="conda", python=["3.6", "3.7", "3.8", "3.9"])
-> def test_conda_conda(session):
->     session.conda_install("pytest", "setuptools")  # Add here other deps which cannot be read from pyproject.toml
->     session.run("python", "setup.py", "develop", "--no-deps")
->     session.run("pytest")
-> ```
+
+# Virtualenv + Poetry
+@nox_poetry.session(python=["3.6", "3.7", "3.8", "3.9"])
+def test_poetry(session):
+    session.run("poetry", "install", external=True)
+    session.run("pytest")
+
+
+# Conda + Poetry
+@nox.session(venv_backend="conda", python=["3.6", "3.7", "3.8", "3.9"])
+def test_conda_poetry(session):
+    session.run("poetry", "install", external=True)
+    session.run("pytest")
+
+
+# Conda + Conda
+@nox.session(venv_backend="conda", python=["3.6", "3.7", "3.8", "3.9"])
+def test_conda_conda(session):
+    session.conda_install("pytest", "setuptools")  # Add here other deps which cannot be read from pyproject.toml
+    session.run("python", "setup.py", "develop", "--no-deps")
+    session.run("pytest")
+ ```
+{{< rawhtml >}}
+</details>
+{{< /rawhtml >}}
