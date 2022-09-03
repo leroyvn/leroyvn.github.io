@@ -4,7 +4,7 @@ This is my personal page. Blog posts are [here](blog). Learn more about this web
 
 ## Projects
 
-[Eradiate](https://eradiate.github.io/) — Radiative transfer model for Earth observation applications.
+[Eradiate](https://www.eradiate.eu/) — Radiative transfer model for Earth observation applications.
 
 [Pinttrs](https://pinttrs.readthedocs.io/) — Supercharge your [`attrs`](https://www.attrs.org) classes with [Pint](https://pint/readthedocs.io)-based unit conversion.
 
