@@ -26,6 +26,11 @@ menu = "main"
 * 🇬🇧 MacKay, David J.C. *Sustainable Energy — without the Hot Air*. Cambridge, England: UIT Cambridge Ltd., 2009. [Full text](http://withouthotair.com)
 * 🇫🇷 Jancovici, Jean-Marc. *Éléments de base sur l’énergie au XXIe siècle*, 2019. [Video, slides and transcript in French, English subtitles](https://jancovici.com/publications-et-co/cours-mines-paristech-2019/cours-mines-paris-tech-juin-2019/)
 
+### Scientific writing
+
+* 🇬🇧 [Common mistakes in technical writing](https://cs.dartmouth.edu/~wjarosz/writing.md.html), Pr Wojciech Jarosz's guide to scientific writing.
+* 🇬🇧 [Brushing Up Science](https://brushingupscience.com/), a blog on scientific literature.
+
 ### Overweight Internet
 
 * 🇬🇧 🇫🇷 [How can I reduce the size of a video in 5 minutes while maintaining a good quality?](https://theshiftproject.org/en/guide-reduce-weight-video-5-minutes/)
