@@ -1,8 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vincent's Personal Page</title><link>https://leroyvn.github.io/</link><description>Recent content on Vincent's Personal Page</description><generator>Hugo -- gohugo.io</generator><language>en-UK</language><copyright>Copyright © 2021, Vincent Leroy.</copyright><lastBuildDate>Wed, 05 Jan 2022 11:30:00 +0100</lastBuildDate><atom:link href="https://leroyvn.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Nox with PDM</title><link>https://leroyvn.github.io/blog/nox_pdm/</link><pubDate>Wed, 05 Jan 2022 11:30:00 +0100</pubDate><guid>https://leroyvn.github.io/blog/nox_pdm/</guid><description>Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&amp;rsquo;ll explain how I integrated Nox in my PDM workflow.
-We will use Nox to automate testing on multiple Python versions during CI. We&amp;rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions.</description></item><item><title>Conda Workflow</title><link>https://leroyvn.github.io/blog/conda_workflow/</link><pubDate>Mon, 21 Jun 2021 11:44:22 +0200</pubDate><guid>https://leroyvn.github.io/blog/conda_workflow/</guid><description>This page describes my Conda workflow.
-Conda I use Conda as my environment and package manager. This choice is the outcome of a long professional history. Pros for choosing Conda:
-it&amp;rsquo;s portable; it&amp;rsquo;s simple to use; it provides optimised binaries for several scientific packages; it saves space on my hard drive; it can install more than just Python stuff. Cons:
-many packages are missing (and interoperability with Pip has many issues when one starts playing with dependency pinning); usually second-class citizen in CI workflows (see also previous point about deps pinning); Conda&amp;rsquo;s dependency resolution is slow; many people don&amp;rsquo;t use Conda.</description></item><item><title>About</title><link>https://leroyvn.github.io/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://leroyvn.github.io/about/</guid><description>About The Human Who Wrote This I&amp;rsquo;m Vincent. I&amp;rsquo;m a research software engineer working for Brussels-based company Rayference. I have a PhD in thermal sciences and I work now on radiative transfer modelling and simulation for Earth observation applications.
-I&amp;rsquo;m an advocate of free software. I believe that sharing knowledge is required for a better understanding of what&amp;rsquo;s around us. The benefits of secrecy are often misunderstood and I believe we can share more than we are used to think in many professional environments.</description></item><item><title>Resources</title><link>https://leroyvn.github.io/resources/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://leroyvn.github.io/resources/</guid><description>Resources 🇬🇧 Content in English | 🇫🇷 Content in French
-A missing flag doesn&amp;rsquo;t mean that this content doesn&amp;rsquo;t exist in that language, it just means that I didn&amp;rsquo;t check whether it was available or not.
-Radiative transfer theory 🇫🇷 Taine, Jean, Franck Enguehard, and Estelle Iacona. Transferts thermiques : Introduction aux transferts d’énergie. 6th ed. Paris: Dunod, 2021. 🇬🇧 Howell, John R., M. Pinar Mengüç, Kyle Daun, and Robert Siegel.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vincent's Personal Page</title><link>https://leroyvn.github.io/</link><description>Recent content on Vincent's Personal Page</description><generator>Hugo</generator><language>en-UK</language><copyright>Copyright © 2021, Vincent Leroy.</copyright><lastBuildDate>Wed, 05 Jan 2022 11:30:00 +0100</lastBuildDate><atom:link href="https://leroyvn.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Nox with PDM</title><link>https://leroyvn.github.io/blog/nox_pdm/</link><pubDate>Wed, 05 Jan 2022 11:30:00 +0100</pubDate><guid>https://leroyvn.github.io/blog/nox_pdm/</guid><description>&lt;p>Nox and PDM are both fantastic Python development tools. However, their opposite stances towards virtual environment usage makes using them together a little more cumbersome. In this note, I&amp;rsquo;ll explain how I integrated Nox in my PDM workflow.&lt;/p>
+&lt;p>We will use Nox to automate testing on multiple Python versions during CI. We&amp;rsquo;d also like to run our tests using a similar command locally without having to maintain almost duplicate Nox sessions. We&amp;rsquo;ll therefore try and vary the Nox session&amp;rsquo;s behaviour using Nox and PDM features.&lt;/p></description></item><item><title>Conda Workflow</title><link>https://leroyvn.github.io/blog/conda_workflow/</link><pubDate>Mon, 21 Jun 2021 11:44:22 +0200</pubDate><guid>https://leroyvn.github.io/blog/conda_workflow/</guid><description>&lt;p>This page describes my Conda workflow.&lt;/p>
+&lt;h2 id="conda">Conda&lt;/h2>
+&lt;p>I use Conda as my environment and package manager. This choice is the outcome of a long professional history. Pros for choosing Conda:&lt;/p>
+&lt;ul>
+&lt;li>it&amp;rsquo;s portable;&lt;/li>
+&lt;li>it&amp;rsquo;s simple to use;&lt;/li>
+&lt;li>it provides optimised binaries for several scientific packages;&lt;/li>
+&lt;li>it saves space on my hard drive;&lt;/li>
+&lt;li>it can install more than just Python stuff.&lt;/li>
+&lt;/ul>
+&lt;p>Cons:&lt;/p>
+&lt;ul>
+&lt;li>many packages are missing (and interoperability with Pip has many issues when one starts playing with dependency pinning);&lt;/li>
+&lt;li>usually second-class citizen in CI workflows (see also previous point about deps pinning);&lt;/li>
+&lt;li>Conda&amp;rsquo;s dependency resolution is &lt;em>slow&lt;/em>;&lt;/li>
+&lt;li>many people don&amp;rsquo;t use Conda.&lt;/li>
+&lt;/ul>
+&lt;p>My Conda workflow is consequently an attempt at overcoming some of these issues.&lt;/p></description></item><item><title>About</title><link>https://leroyvn.github.io/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://leroyvn.github.io/about/</guid><description>&lt;h1 id="about">About&lt;/h1>
+&lt;h2 id="the-human-who-wrote-this">The Human Who Wrote This&lt;/h2>
+&lt;p>I&amp;rsquo;m Vincent. I&amp;rsquo;m a research software engineer working for Brussels-based company &lt;a href="https://www.rayference.eu/">Rayference&lt;/a>. I have a PhD in thermal sciences and I work now on radiative transfer modelling and simulation for Earth observation applications.&lt;/p>
+&lt;p>I&amp;rsquo;m an advocate of free software. I believe that sharing knowledge is required for a better understanding of what&amp;rsquo;s around us. The benefits of secrecy are often misunderstood and I believe we can share more than we are used to think in many professional environments.&lt;/p></description></item><item><title>Resources</title><link>https://leroyvn.github.io/resources/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://leroyvn.github.io/resources/</guid><description>&lt;h1 id="resources">Resources&lt;/h1>
+&lt;p>🇬🇧 Content in English | 🇫🇷 Content in French&lt;/p>
+&lt;p>&lt;em>A missing flag doesn&amp;rsquo;t mean that this content doesn&amp;rsquo;t exist in that language, it just means that I didn&amp;rsquo;t check whether it was available or not.&lt;/em>&lt;/p>
+&lt;h3 id="radiative-transfer-theory">Radiative transfer theory&lt;/h3>
+&lt;ul>
+&lt;li>🇫🇷 Taine, Jean, Franck Enguehard, and Estelle Iacona. &lt;em>Transferts thermiques : Introduction aux transferts d’énergie&lt;/em>. 6th ed. Paris: Dunod, 2021.&lt;/li>
+&lt;li>🇬🇧 Howell, John R., M. Pinar Mengüç, Kyle Daun, and Robert Siegel. &lt;em>Thermal Radiation Heat Transfer&lt;/em>. 7th ed. Boca Raton: CRC Press, 2020. DOI: &lt;a href="https://doi.org/10.1201/9780429327308">10.1201/9780429327308&lt;/a>&lt;/li>
+&lt;li>🇬🇧 Modest, Michael F., and Sandip Mazumder. &lt;em>Radiative Heat Transfer&lt;/em>. 4th edition. London: Academic Press, 2021.&lt;/li>
+&lt;li>🇬🇧 Petty, Grant William. &lt;em>A First Course in Atmospheric Radiation&lt;/em>. 2nd ed. Madison, Wisconsin: Sundog Publishing, 2006.&lt;/li>
+&lt;/ul>
+&lt;h3 id="physically-based-rendering">Physically based rendering&lt;/h3>
+&lt;ul>
+&lt;li>🇬🇧 Lectures on physically-based rendering at TU Wien. &lt;a href="https://www.youtube.com/watch?v=5sY_hoh_IDc&amp;amp;list=PLmIqTlJ6KsE2yXzeq02hqCDpOdtj6n6A9">Video&lt;/a>&lt;/li>
+&lt;li>🇬🇧 Pharr, Matt, Wenzel Jakob, and Greg Humphreys. &lt;em>Physically Based Rendering: From Theory to Implementation&lt;/em>. 3rd Edition. Morgan Kaufmann, 2016. &lt;a href="https://www.pbr-book.org/">Full text&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="energy--climate">Energy / climate&lt;/h3>
+&lt;ul>
+&lt;li>🇬🇧 MacKay, David J.C. &lt;em>Sustainable Energy — without the Hot Air&lt;/em>. Cambridge, England: UIT Cambridge Ltd., 2009. &lt;a href="http://withouthotair.com">Full text&lt;/a>&lt;/li>
+&lt;li>🇫🇷 Jancovici, Jean-Marc. &lt;em>Éléments de base sur l’énergie au XXIe siècle&lt;/em>, 2019. &lt;a href="https://jancovici.com/publications-et-co/cours-mines-paristech-2019/cours-mines-paris-tech-juin-2019/">Video, slides and transcript in French, English subtitles&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="scientific-writing">Scientific writing&lt;/h3>
+&lt;ul>
+&lt;li>🇬🇧 &lt;a href="https://cs.dartmouth.edu/~wjarosz/writing.md.html">Common mistakes in technical writing&lt;/a>, Pr Wojciech Jarosz&amp;rsquo;s guide to scientific writing.&lt;/li>
+&lt;li>🇬🇧 &lt;a href="https://brushingupscience.com/">Brushing Up Science&lt;/a>, a blog on scientific literature.&lt;/li>
+&lt;/ul>
+&lt;h3 id="overweight-internet">Overweight Internet&lt;/h3>
+&lt;ul>
+&lt;li>🇬🇧 🇫🇷 &lt;a href="https://theshiftproject.org/en/guide-reduce-weight-video-5-minutes/">How can I reduce the size of a video in 5 minutes while maintaining a good quality?&lt;/a>&lt;/li>
+&lt;li>🇬🇧 &lt;a href="https://solar.lowtechmagazine.com/2020/01/how-sustainable-is-a-solar-powered-website.html">Low-tech magazine&amp;rsquo;s Solar website story&lt;/a>&lt;/li>
+&lt;li>Tools used to build this website: &lt;a href="https://gohugo.io/">Hugo&lt;/a>; &lt;a href="https://github.com/janraasch/hugo-bearblog/">hugo-bearblog&lt;/a> theme&lt;/li>
+&lt;/ul></description></item></channel></rss>
