@@ -1,0 +1,18 @@
+[workspace]
+authors = ["Vincent Leroy <vincent.leroy@rayference.eu>"]
+channels = ["conda-forge"]
+description = "Vincent's personal website"
+name = "leroyvn-github-io"
+platforms = ["linux-64", "osx-64", "osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+build = "hugo --minify"
+clean = "rm -rf build"
+server = "hugo server"
+
+[dependencies]
+pip = "*"
+
+[pypi-dependencies]
+hugo = ">=0.146, <0.147"
