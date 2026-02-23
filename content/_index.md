@@ -6,7 +6,7 @@ This is my personal page. Blog posts are [here](blog). Learn more about this web
 
 [Eradiate](https://www.eradiate.eu/) — Radiative transfer model for Earth observation applications.
 
-[axsdb](github.com/eradiate/axsdb) — The absorption database interface of Eradiate.
+[AxsDB](https://github.com/eradiate/axsdb) — The absorption database interface of Eradiate.
 
 [xarray-validate](https://github.com/leroyvn/xarray-validate) — Lightweight xarray data validator.
 
