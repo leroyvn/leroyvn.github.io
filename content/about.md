@@ -8,14 +8,18 @@ menu = "main"
 
 ## The Human Who Wrote This
 
-I'm Vincent. I'm a research software engineer working for Brussels-based company [Rayference](https://www.rayference.eu/). I have a PhD in thermal sciences and I work now on radiative transfer modelling and simulation for Earth observation applications.
+I'm Vincent, a research software engineer working for Brussels-based company [Rayference](https://www.rayference.eu/). I have a PhD in thermal sciences and I work now on radiative transfer modelling and simulation applied to Earth observation.
 
-I'm an advocate of free software. I believe that sharing knowledge is required for a better understanding of what's around us. The benefits of secrecy are often misunderstood and I believe we can share more than we are used to think in many professional environments.
+I believe in the virtues of sharing: we achieve greater things through cooperation than competition, where *greater* is to be understood from the angle of wisdom rather than cleverness. My desire to contribute to open-source is a manifestation of this.
 
-I'm a climate activist. You won't find me in many demonstrations, I'm more the kind who tries to make an impact by educating folks around them. Our civilisation is on a self-destructive path and changing that requires deep cultural changes, which can't be achieved through conflict and confrontation only.
+I am deeply concerned with the path humanity has taken: the industrial race that is happening is harming people, but also all the living beings we depend on. I used to be a climate activist, but I had to wind this down when my family grew for lack of time.
 
-I'm a musician and a martial artist. I'm French, Belgium is my home: Pardon my English. 🇫🇷 🇧🇪 🇬🇧
+I'm trapped in a competitive professional game that forces me to use AI technologies to stay economically relevant, although I'm aware of the associated economical, environmental and ethical threats.
+
+I'd like to leave this life thinking I did my best to make the world a better place for our children than if I hadn't be there.
+
+I'm a musician and a martial artist. I'm French, Belgium is my home: Pardon my English (which I won't have fixed by AI). 🇫🇷 🇧🇪 🇬🇧
 
 ## This Website
 
-This website is built with [Hugo](https://www.gohugo.io/). It uses the super lightweight [Hugo ʕ•ᴥ•ʔ Bear Blog](https://github.com/janraasch/hugo-bearblog/) theme. The Internet is overweight and it's a growing part of our civilisation's problem.
+This website is built with [Hugo](https://www.gohugo.io/). It uses the super lightweight [Hugo ʕ•ᴥ•ʔ Bear Blog](https://github.com/janraasch/hugo-bearblog/) theme. The Internet is overweight and it's a growing part of our civilization's problem; efficient web design is a requirement for a more sustainable Internet.
