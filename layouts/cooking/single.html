@@ -1,0 +1,88 @@
+{{ define "main" }}
+<style>
+  /* Recipe styling. Title comes from front matter (no `#` in the body).
+     Relies on body structure: 1st <ul> = meta line, 2nd <ul> = ingredients,
+     <ol> = steps.
+     ponytail: structure-based selectors; move meta/ingredients to front
+     matter if a recipe ever needs a different intro layout. */
+  .recipe {
+    max-width: 42rem;
+  }
+
+  .recipe h2 {
+    margin-top: 2rem;
+    border-bottom: 2px solid #cccccc;
+    padding-bottom: 0.2rem;
+  }
+
+  /* Meta line (prep time / difficulty): 1st list, inline, muted, no bullets. */
+  .recipe > ul:first-of-type {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  .recipe > ul:first-of-type li {
+    display: inline-block;
+    margin-right: 1.5rem;
+  }
+
+  /* Ingredients: 2nd list, card, two columns on wide screens. */
+  .recipe > ul:nth-of-type(2) {
+    list-style: none;
+    padding: 1rem 1.5rem;
+    background: #f7f7f7;
+    border: 1px solid #e7e7e7;
+    border-radius: 8px;
+    columns: 2;
+  }
+  @media (max-width: 30rem) {
+    .recipe > ul:nth-of-type(2) { columns: 1; }
+  }
+  .recipe > ul:nth-of-type(2) li {
+    padding: 0.15rem 0;
+    break-inside: avoid;
+  }
+
+  /* Steps: big circled numbers, generous spacing. */
+  .recipe ol {
+    list-style: none;
+    counter-reset: step;
+    padding: 0;
+  }
+  .recipe ol li {
+    counter-increment: step;
+    position: relative;
+    padding: 0.3rem 0 1rem 3rem;
+    line-height: 1.5;
+  }
+  .recipe ol li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    width: 2rem;
+    height: 2rem;
+    background: #989898;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+</style>
+
+<h1>{{ .Title }}</h1>
+
+<article class="recipe">
+  {{ .Content }}
+</article>
+
+<p>
+  {{ range (.GetTerms "tags") }}
+  <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+  {{ end }}
+</p>
+{{ end }}
