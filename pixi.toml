@@ -12,7 +12,7 @@ clean = "rm -rf build"
 server = "hugo server"
 
 [dependencies]
-python = "3.14"
+python = "3.14.*"
 pip = "*"
 
 [pypi-dependencies]
