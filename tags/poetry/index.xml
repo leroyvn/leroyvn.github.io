@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Poetry on Vincent's Personal Page</title><link>https://leroyvn.github.io/tags/poetry/</link><description>Recent content in Poetry on Vincent's Personal Page</description><generator>Hugo</generator><language>en-UK</language><copyright>Copyright © 2021, Vincent Leroy.</copyright><lastBuildDate>Mon, 21 Jun 2021 11:44:22 +0200</lastBuildDate><atom:link href="https://leroyvn.github.io/tags/poetry/index.xml" rel="self" type="application/rss+xml"/><item><title>Conda Workflow</title><link>https://leroyvn.github.io/blog/conda_workflow/</link><pubDate>Mon, 21 Jun 2021 11:44:22 +0200</pubDate><guid>https://leroyvn.github.io/blog/conda_workflow/</guid><description>&lt;p>This page describes my Conda workflow.&lt;/p>
-&lt;h2 id="conda">Conda&lt;/h2>
-&lt;p>I use Conda as my environment and package manager. This choice is the outcome of a long professional history. Pros for choosing Conda:&lt;/p>
-&lt;ul>
-&lt;li>it&amp;rsquo;s portable;&lt;/li>
-&lt;li>it&amp;rsquo;s simple to use;&lt;/li>
-&lt;li>it provides optimised binaries for several scientific packages;&lt;/li>
-&lt;li>it saves space on my hard drive;&lt;/li>
-&lt;li>it can install more than just Python stuff.&lt;/li>
-&lt;/ul>
-&lt;p>Cons:&lt;/p>
-&lt;ul>
-&lt;li>many packages are missing (and interoperability with Pip has many issues when one starts playing with dependency pinning);&lt;/li>
-&lt;li>usually second-class citizen in CI workflows (see also previous point about deps pinning);&lt;/li>
-&lt;li>Conda&amp;rsquo;s dependency resolution is &lt;em>slow&lt;/em>;&lt;/li>
-&lt;li>many people don&amp;rsquo;t use Conda.&lt;/li>
-&lt;/ul>
-&lt;p>My Conda workflow is consequently an attempt at overcoming some of these issues.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Poetry on Vincent's Personal Page</title><link>https://leroyvn.github.io/tags/poetry/</link><description>Recent content in Poetry on Vincent's Personal Page</description><generator>Hugo</generator><language>en-UK</language><copyright>Copyright © 2021, Vincent Leroy.</copyright><lastBuildDate>Mon, 21 Jun 2021 11:44:22 +0200</lastBuildDate><atom:link href="https://leroyvn.github.io/tags/poetry/index.xml" rel="self" type="application/rss+xml"/><item><title>Conda Workflow</title><link>https://leroyvn.github.io/blog/conda_workflow/</link><pubDate>Mon, 21 Jun 2021 11:44:22 +0200</pubDate><guid>https://leroyvn.github.io/blog/conda_workflow/</guid><description>&lt;p&gt;This page describes my Conda workflow.&lt;/p&gt;
+&lt;h2 id="conda"&gt;Conda&lt;/h2&gt;
+&lt;p&gt;I use Conda as my environment and package manager. This choice is the outcome of a long professional history. Pros for choosing Conda:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;it&amp;rsquo;s portable;&lt;/li&gt;
+&lt;li&gt;it&amp;rsquo;s simple to use;&lt;/li&gt;
+&lt;li&gt;it provides optimised binaries for several scientific packages;&lt;/li&gt;
+&lt;li&gt;it saves space on my hard drive;&lt;/li&gt;
+&lt;li&gt;it can install more than just Python stuff.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;many packages are missing (and interoperability with Pip has many issues when one starts playing with dependency pinning);&lt;/li&gt;
+&lt;li&gt;usually second-class citizen in CI workflows (see also previous point about deps pinning);&lt;/li&gt;
+&lt;li&gt;Conda&amp;rsquo;s dependency resolution is &lt;em&gt;slow&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;many people don&amp;rsquo;t use Conda.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My Conda workflow is consequently an attempt at overcoming some of these issues.&lt;/p&gt;</description></item></channel></rss>
