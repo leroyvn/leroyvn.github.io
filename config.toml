@@ -11,7 +11,7 @@ theme = 'hugo-bearblog'
 title = "Vincent's Personal Page"
 author = "Vincent Leroy"
 copyright = "Copyright © 2021, Vincent Leroy."
-languageCode = "en-UK"
+locale = "en-UK"
 
 # Generate a nice robots.txt for SEO
 enableRobotsTXT = true
