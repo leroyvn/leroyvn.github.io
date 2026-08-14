@@ -32,8 +32,9 @@
   .recipe > ul:nth-of-type(2) {
     list-style: none;
     padding: 1rem 1.5rem;
-    background: #f7f7f7;
-    border: 1px solid #e7e7e7;
+    /* Translucent grey: readable on both light and dark backgrounds. */
+    background: rgba(128, 128, 128, 0.12);
+    border: 1px solid rgba(128, 128, 128, 0.3);
     border-radius: 8px;
     columns: 2;
   }
