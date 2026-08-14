@@ -3,4 +3,3 @@ build/
 .hugo_build.lock
 .pixi/
 pixi.lock
-CLAUDE.md
